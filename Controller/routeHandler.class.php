@@ -27,8 +27,8 @@ class routeHandle{
             } else {
                 $this->cmd = 'overview';
             }
-        } elseif (!isset($_SESSION['userName']) && $_GET['cmd'] != 'login') {
-            $this->cmd = 'register';
+        } elseif (!isset($_SESSION['userName']) && $_GET['cmd'] != 'login' && $_GET['cmd'] != 'register') {
+            $this->cmd = 'overview';
         } else {
             $this->cmd = $_GET['cmd'];
         }
@@ -126,7 +126,7 @@ class routeHandle{
                 }
                 break;
             case 'overview':
-                if(isset($_GET['act'])){
+                if(isset($_GET['act']) && isset($_SESSION['userName'])){
                     switch($_GET['act']){
                         case 'edit':
                             $post = new \Model\Post($_GET['id'],'', '', '', '');
@@ -183,7 +183,7 @@ class routeHandle{
                     }
                 }else{
                     $message = '';
-                    if(isset($_GET['message'])){
+                    if(isset($_GET['message']) && isset($_SESSION['userName'])){
                         switch($_GET['message']){
                             case 'deleted':
                                 $message = 'Eintrag wurde gel&ouml;scht';
@@ -198,6 +198,9 @@ class routeHandle{
                                 $message = 'Um einen neuen Eintarg zu erstellen, klicken sie auf das Plus oben rechts';
                                 break;
                         }
+                    }else if(!isset($_SESSION['infoWindow'])){
+                        $_SESSION['infoWindow'] = 'shown';
+                        $message = 'Bitte melden Sie sich an um einen Eintrag zu erstellen';
                     }
                     $list = new \Model\PostList($database, $template);
                     $model = $template->loadTemplate('postList.html');
@@ -205,11 +208,11 @@ class routeHandle{
                         'POSTS' => $list->getList($database, $template),
                         'MESSAGE' => $message
                     ));
-                   // $content = 'overview';
                 }
                 break;
             default:
-                $content = 'You found a dead link';
+                header('Location: ?cmd=overview');
+                die();
                 break;
         }
         return $content;

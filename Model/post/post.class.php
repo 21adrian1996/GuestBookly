@@ -46,7 +46,7 @@ class Post
         return $this->user_id;
     }
     public function getById($database){
-        $query = 'SELECT * FROM `post` WHERE `id` = '.$this->id.';';
+        $query = 'SELECT * FROM `post` WHERE `id` = '.intval($this->id).';';
         $result = $database->executeQuery($query);
         $fetchedResult = $result->fetch_assoc();
         $this->title = $fetchedResult['titel'];
@@ -57,20 +57,25 @@ class Post
     public function save($database)
     {
         $query = 'INSERT INTO `post`(`titel`,`content`,`user_id`, `date`)
-                  VALUES(\'' . $this->title . '\',\'' . $this->content . '\',' . $this->user_id . ', \''. date('Y-m-d H:i:s',$this->date) .'\')';
+                  VALUES(\'' .
+                            $database->real_escape_string($this->title) . '\',\'' .
+                            $database->real_escape_string($this->content) . '\',' .
+                            $database->real_escape_string($this->user_id) . ', \''.
+                            date('Y-m-d H:i:s',$this->date) .'\')';
         $database->executeQuery($query);
     }
     public function update($database)
     {
+
         $query = 'UPDATE `post`
-                    SET `titel` = "'.$this->title.'",
-                    `content` = "'.$this->content.'"
-                    WHERE `id` ='.$this->id;
+                    SET `titel` = "'.$database->real_escape_string($this->title).'",
+                    `content` = "'.$database->real_escape_string($this->content).'"
+                    WHERE `id` ='.intval($this->id);
         $database->executeQuery($query);
     }
     public function delete($database)
     {
-        $query = 'DELETE FROM `post` WHERE `id` = '.$this->id.';';
+        $query = 'DELETE FROM `post` WHERE `id` = '.intval($this->id).';';
         $database->executeQuery($query);
     }
 

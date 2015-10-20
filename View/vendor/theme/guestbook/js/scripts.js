@@ -19,6 +19,15 @@ $('[data-toggle=offcanvas]').click(function() {
                 html: true,
                 confirmButtonText: "Okey"
             });
+        }else if($("#message").text() == 'Bitte melden Sie sich an um einen Eintrag zu erstellen'){
+            swal({
+                title: "Herzlich  Willkommen",
+                text: "Um einen neuen Eintrag zu erstellen, m&uuml;ssen Sie sich anmelden. <br />" +
+                "Klicken Sie bitte auf das <i class='fa fa-sign-in'></i> Icon oben rechts.<br /> <br />" +
+                "Wenn Sie noch keinen Benutzer haben, k&ouml;nnen Sie auf das <i class='fa fa-user-plus'></i> Icon klicken<br /><br />",
+                html: true,
+                confirmButtonText: "Okey"
+            });
         } else {
             swal({
                 title: $("#message").text(),

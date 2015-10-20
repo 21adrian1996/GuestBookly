@@ -66,7 +66,13 @@ class User
     public function save($database)
     {
         $query = 'INSERT INTO `user`(`name`,`firstname`,`lastname`,`password`,`email`)
-                  VALUES(\'' . $this->name . '\',\'' . $this->firstname . '\',\'' . $this->lastname . '\',\'' . hash("sha224", $this->password) . '\',\'' . $this->email . '\')';
+                  VALUES(\'' .
+                            $database->real_escape_string($this->name) . '\',\'' .
+                            $database->real_escape_string($this->firstname) . '\',\'' .
+                            $database->real_escape_string($this->lastname) . '\',\'' .
+                            hash("sha224", $this->password) . '\',\'' .
+                            $database->real_escape_string($this->email) . '\'
+                )';
         $database->executeQuery($query);
     }
 
@@ -82,7 +88,7 @@ class User
     public function checkUserExists($database, $username)
     {
         $query = 'SELECT count(id) AS `count` FROM `user`
-                    WHERE `name` = "' . $username . '";';
+                    WHERE `name` = "' . $database->real_escape_string($username) . '";';
         $result = $database->executeQuery($query);
         $fetchedResult = $result->fetch_assoc();
         // if there is no count, the username don't exists in database, so we send back false
@@ -161,7 +167,7 @@ class User
     public function checkLogin($database)
     {
         $query = 'SELECT count(id) as counted FROM `user`
-                    WHERE `name` = "' . $this->name . '"
+                    WHERE `name` = "' . $database->real_escape_string($this->name) . '"
                     AND `password` ="' . hash("sha224", $this->password) . '";';
         $result = $database->executeQuery($query);
         $fetchedResult = $result->fetch_assoc();
@@ -175,7 +181,7 @@ class User
     public function getIdByName($database)
     {
         $query = 'SELECT id FROM `user`
-                    WHERE `name` = "' . $this->name . '";';
+                    WHERE `name` = "' . $database->real_escape_string($this->name) . '";';
         $result = $database->executeQuery($query);
         $fetchedResult = $result->fetch_assoc();
         return $fetchedResult["id"];
@@ -183,7 +189,7 @@ class User
     public function getNameById($database)
     {
         $query = 'SELECT `name` FROM `user`
-                    WHERE `id` = "' . $this->id . '";';
+                    WHERE `id` = "' . intval($this->id) . '";';
         $result = $database->executeQuery($query);
         $fetchedResult = $result->fetch_assoc();
         return $fetchedResult["name"];
@@ -191,8 +197,7 @@ class User
     public function changePassword($database){
         $query = 'UPDATE `user`
                   SET `password` = "' . hash("sha224", $this->password) . '"
-                  WHERE `id` = '.$this->id.'s;';
-        var_dump($query);
+                  WHERE `id` = '.intval($this->id).';';
         $database->executeQuery($query);
     }
 }

@@ -34,10 +34,10 @@ class Controller
         $template = $this->template->loadTemplate('index.html');
         $handler = new \Controller\routeHandle();
         $content = $handler->doHandle($database, $this->template);
-        $nav = '';
         if (isset($_SESSION['userName'])) {
             $nav = file_get_contents('View/vendor/theme/guestbook/nav.html');
-
+        }else{
+            $nav = file_get_contents('View/vendor/theme/guestbook/nav_unregisterd.html');
         }
         echo $template->render(array('CONTENT' => $content, 'NAVIGATION' => $nav));
 

@@ -65,7 +65,8 @@ class routeHandle{
                     easier for hackers to find out correct data */
                     if ($user->checkLogin($database)) {
                         $user->saveUserIsLoggedIn($database);
-                        header('Location: ?cmd=overview');
+                        header('Location: ?cmd=overview&message=hello');
+                        die();
                     } else {
                         $content = $loginContent->render(array('ERROR_MESSAGE' => 'Login Daten sind falsch', "USERNAME" => $user->getName()));
                     }
@@ -80,9 +81,15 @@ class routeHandle{
                 if(isset($_POST['submit'])){
                     $user = new \Model\User($_SESSION['userId'], '', '', '', $_POST['password'], '');
                     $user->changePassword($database);
+                    header('Location: ?cmd=passwordChange&message=changed');
+                    die();
                 }
                 $model = $template->loadTemplate('changePassword.html');
-                $content = $model->render(Array());
+                $message = '';
+                if(isset($_GET['message']) && $_GET['message'] == "changed"){
+                   $message = "Passwort wurde erfolgreich ge&auml;ndert" ;
+                }
+                $content = $model->render(Array('MESSAGE' => $message));
                 break;
             case 'register':
                 $registerContent = $template->loadTemplate('register.html');
@@ -98,7 +105,8 @@ class routeHandle{
                     if ($errorData == "") {
                         $user->save($database);
                         $user->saveUserIsLoggedIn($database);
-                        header('Location: ?cmd=survey');
+                        header('Location: ?cmd=overview&message=hello');
+                        die();
                     }
 
                     // if there is a problem with the data, we tell this to the user and refill the form with his data
@@ -129,7 +137,7 @@ class routeHandle{
                                         $post->setContent($_POST['content']);
                                         $post->setTitle($_POST['title']);
                                         $post->update($database);
-                                        header('Location: ?cmd=overview');
+                                        header('Location: ?cmd=overview&message=edited');
                                         die();
                                     }
                                 }else{
@@ -153,7 +161,7 @@ class routeHandle{
                             if($post->getUserId() == $_SESSION['userId']) {
                                 $post->delete($database);
                             }
-                            header('Location: ?cmd=overview');
+                            header('Location: ?cmd=overview&message=deleted');
                             die();
                             break;
                         case 'add':
@@ -161,6 +169,8 @@ class routeHandle{
                                 if(isset($_POST['title']) && isset($_POST['content'])){
                                     $post = new \Model\Post('',$_POST['title'], $_POST['content'], $_SESSION['userId'], time());
                                     $post->save($database);
+                                    header('Location: ?cmd=overview&message=added');
+                                    die();
                                 }
                             }
                             $model = $template->loadTemplate('modifyPost.html');
@@ -172,8 +182,29 @@ class routeHandle{
                             break;
                     }
                 }else{
+                    $message = '';
+                    if(isset($_GET['message'])){
+                        switch($_GET['message']){
+                            case 'deleted':
+                                $message = 'Eintrag wurde gel&ouml;scht';
+                                break;
+                            case 'added':
+                                $message = 'Eintrag wurde erstellt';
+                                break;
+                            case 'edited':
+                                $message = 'Eintrag wurde ge&auml;ndert';
+                                break;
+                            case 'hello':
+                                $message = 'Um einen neuen Eintarg zu erstellen, klicken sie auf das Plus oben rechts';
+                                break;
+                        }
+                    }
                     $list = new \Model\PostList($database, $template);
-                    $content = $list->getList($database, $template);
+                    $model = $template->loadTemplate('postList.html');
+                    $content = $model->render(array(
+                        'POSTS' => $list->getList($database, $template),
+                        'MESSAGE' => $message
+                    ));
                    // $content = 'overview';
                 }
                 break;

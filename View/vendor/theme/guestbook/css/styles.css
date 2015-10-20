@@ -270,6 +270,12 @@ small.text-muted {
 a.editPost {
     margin-right: 20px;
 }
+div#message {
+    color: black;
+    text-align: center;
+    padding: 10px 0px;
+    margin-bottom: 15px;
+}
 /*
  * off canvas sidebar
  * --------------------------------------------------

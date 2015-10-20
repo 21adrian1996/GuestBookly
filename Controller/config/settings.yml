@@ -1,5 +1,5 @@
 database:
     host     : localhost
     user     : edp
-    password : edp
+    password :
     name     : guestbookly

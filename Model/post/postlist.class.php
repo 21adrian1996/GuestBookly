@@ -17,10 +17,12 @@ class PostList
     {
         $query = 'SELECT `id`, `titel`, `content`, `user_id`, `date` FROM `post`;';
         $result = $database->executeQuery($query);
-        $fetchedResult = $result->fetch_all();
+        while ($row = $result->fetch_assoc()) {
+            $fetchedResult[] = $row;
+        }
         $content = "";
         foreach($fetchedResult as $postData){
-            $post = new \Model\Post($postData[0],$postData[1],$postData[2], $postData[3], $postData[4]);
+            $post = new \Model\Post($postData['id'],$postData['titel'],$postData['content'], $postData['user_id'], $postData['date']);
             $content .= $post->getOutput($database, $template);
         }
         return $content;

@@ -1,0 +1,2 @@
+# Disallow access to config files, so the login credentials are secure
+Deny from all

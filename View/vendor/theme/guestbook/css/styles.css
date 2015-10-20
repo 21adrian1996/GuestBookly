@@ -249,8 +249,27 @@ small.text-muted {
   }
 
 }
-
-
+#goToLogin, #goToRegister, #goToOverview {
+    color: green;
+    margin-left: 20px;
+    font-size: 1.7rem;
+}
+#error_message {
+    color: #b94a48 !important;
+    font-size: 1.6rem;
+}
+.nav .fa {
+    font-size: 2rem;
+}
+#postContent {
+    display: block;
+    width: 100%;
+    resize: vertical;
+    min-height: 200px;
+}
+a.editPost {
+    margin-right: 20px;
+}
 /*
  * off canvas sidebar
  * --------------------------------------------------

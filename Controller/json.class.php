@@ -25,11 +25,11 @@ class JsonController
 
         // checkuserexists = user tried to register and we tell him if the user is available or not, so he can can it
         // if its already in use
+
         if($_POST['act'] == 'checkuserexists'){
 
-            include_once 'Model/user/user.class.php';
+            $user = new \Model\User('','','','','','');
 
-            $user = new \SimplyPartners\Model\User('','','','','','');
             $userExists = $user->checkUserExists($database, $_POST['user']);
 
             echo json_encode(array("value" => $userExists));

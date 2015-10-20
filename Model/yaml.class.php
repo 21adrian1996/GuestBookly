@@ -21,16 +21,18 @@ class Yaml{
         $handle = fopen($this->file, "r");
         if ($handle) {
             while (($line = fgets($handle)) !== false) {
-                $configData = explode(':', str_replace(array("\r", "\n", ' '), '', $line));
-                if(empty($configData[1])){
-                    $section = $configData[0];
+                $yamlData = explode(':', str_replace(array("\r", "\n", ' '), '', $line));
+                if(empty($yamlData[1])){
+                    $section = $yamlData[0];
+                }else if($yamlData[1] == 'notset') {
+                    $yml[$section][$yamlData[0]] = '';
                 }else{
-                    $config[$section][$configData[0]] = $configData[1];
+                    $yml[$section][$yamlData[0]] = $yamlData[1];
                 }
             }
             fclose($handle);
         }
-        return $config;
+        return $yml;
     }
 
 }

@@ -11,6 +11,7 @@
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link href="View/vendor/theme/guestbook/css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body>
 <div class="wrapper">
@@ -26,13 +27,9 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a href="/" class="navbar-brand logo">GuestBookly</a>
+                        <a href="?cmd=overview" class="navbar-brand logo">GuestBookly</a>
                     </div>
-                    <nav class="collapse navbar-collapse" role="navigation">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#postModal">Post</a></li>
-                        </ul>
-                    </nav>
+                    {{ NAVIGATION | raw }}
                 </div> <div class="padding">
                     <div class="full col-sm-9">
                         {{ CONTENT | raw }}

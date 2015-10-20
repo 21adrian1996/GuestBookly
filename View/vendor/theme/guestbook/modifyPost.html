@@ -1,0 +1,26 @@
+<div class="well">
+    <h1>{{ HEADING }}</h1>
+    <form action="?cmd=overview&act={{ ACT }}" method="post" id="addPost">
+        <div class="row control-group">
+            <p id="error_message">{{ ERROR_MESSAGE }}</p>
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Titel</label>
+                <input type="text" value="{{ TITLE }}" class="form-control" placeholder="Titel" id="title" name="title" required >
+            </div>
+        </div>
+        <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Inhalt</label>
+                <textarea name="content" id="postContent" placeholder="{{ POSTCONTENT }}" required>{{ POSTCONTENT }}</textarea>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <button type="submit" name="submit" class="btn btn-success btn-lg">Speichern</button>
+                <button type="reset" name="submit" class="btn btn-success btn-lg">zurücksetzten</button>
+            </div>
+        </div>
+    </form>
+    <a href="?cmd=overview" id="goToOverview">Zur&uuml;ck zur &Uuml;bersicht</a>
+</div>

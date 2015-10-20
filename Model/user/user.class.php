@@ -81,13 +81,12 @@ class User
      */
     public function checkUserExists($database, $username)
     {
-        $query = 'SELECT count(id) FROM `user`
+        $query = 'SELECT count(id) AS `count` FROM `user`
                     WHERE `name` = "' . $username . '";';
         $result = $database->executeQuery($query);
         $fetchedResult = $result->fetch_assoc();
-
         // if there is no count, the username don't exists in database, so we send back false
-        if ($fetchedResult[0] == 0) {
+        if ($fetchedResult["count"] == 0) {
             return false;
         } else {
             return true;
@@ -113,29 +112,29 @@ class User
 
             // username must be 6 chars long, only contain alphanumeric chars and can only exist once
             if (strlen($this->name) != 6) {
-                $error_message .= "Benutzername muss genau 6 Zeichen lang sein";
+                $error_message .= "- Benutzername muss genau 6 Zeichen lang sein ";
             } elseif (!ctype_alnum($this->name)) {
-                $error_message .= "Benutzername darf nur aus Buchstaben und Ziffern bestehen";
+                $error_message .= "- Benutzername darf nur aus Buchstaben und Ziffern bestehen ";
             } elseif ($this->checkUserExists($database, $this->name)) {
-                $error_message .= "Benutzername ist bereits vergeben";
+                $error_message .= "Benutzername ist bereits vergeben ";
             }
         } else {
-            $error_message .= "Benutzername muss gesetzt sein";
+            $error_message .= "Benutzername muss gesetzt sein ";
         }
 
         // we only check if the rest is set, because the validation is done over javascript and if its turned off, its
         // not our problem, its the users problem and it is also his problem if his password is not strong
         if (!isset($this->firstname)) {
-            $error_message .= "Vorname muss gesetzt sein";
+            $error_message .= "- Vorname muss gesetzt sein ";
         }
         if (!isset($this->lastname)) {
-            $error_message .= "Nachname muss gesetzt sein";
+            $error_message .= "- Nachname muss gesetzt sein ";
         }
         if (!isset($this->password)) {
-            $error_message .= "Passwort muss gesetzt sein";
+            $error_message .= "- Passwort muss gesetzt sein ";
         }
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            $error_message .= "E-Mail Adresse ist ungültig";
+            $error_message .= "- E-Mail Adresse ist ungültig ";
         }
         return $error_message;
     }
@@ -179,6 +178,21 @@ class User
                     WHERE `name` = "' . $this->name . '";';
         $result = $database->executeQuery($query);
         $fetchedResult = $result->fetch_assoc();
-        return $fetchedResult;
+        return $fetchedResult["id"];
+    }
+    public function getNameById($database)
+    {
+        $query = 'SELECT `name` FROM `user`
+                    WHERE `id` = "' . $this->id . '";';
+        $result = $database->executeQuery($query);
+        $fetchedResult = $result->fetch_assoc();
+        return $fetchedResult["name"];
+    }
+    public function changePassword($database){
+        $query = 'UPDATE `user`
+                  SET `password` = "' . hash("sha224", $this->password) . '"
+                  WHERE `id` = '.$this->id.'s;';
+        var_dump($query);
+        $database->executeQuery($query);
     }
 }

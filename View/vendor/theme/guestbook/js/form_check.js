@@ -39,20 +39,20 @@ function checkUserName(username, allOK) {
         $("input#username").next(".text-danger").html("Benutzername ist nicht alphanummerisch");
         allOK = false;
     }
-    var data = {'cmd': 'json', 'act': 'checkuserexists', 'user': $("input#username").val()};
-    $.ajax({
-        url: 'index.php',
-        type: 'POST',
-        data: data,
-        dataType: 'json',
-        success: function (data) {
-            if (data.value == true) {
-                $("input#username").next(".text-danger").html('Benutzername ist bereits vergeben');
+        var data = {'cmd': 'json', 'act': 'checkuserexists', 'user': $("input#username").val()};
+        $.ajax({
+            url: 'index.php',
+            type: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function (data) {
+                if (data.value == true) {
+                    $("input#username").next(".text-danger").html('Benutzername ist bereits vergeben');
+                }
+                allOK = false;
             }
-            allOK = false;
-        }
-    });
-    return allOK;
+        });
+        return allOK;
 }
 function checkPasswortMatch(password, passwordConfirm, allOK) {
     if (password != passwordConfirm) {

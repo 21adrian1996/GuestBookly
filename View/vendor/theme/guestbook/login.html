@@ -4,13 +4,13 @@
         <div class="row control-group">
             <p id="error_message">{{ ERROR_MESSAGE }}</p>
             <div class="form-group col-xs-12 floating-label-form-group controls">
-                <label>Username</label>
+                <label><i class="fa fa-user"></i> Username</label>
                 <input type="text" value="{{ USERNAME }}" class="form-control" placeholder="Username" id="username" name="username" required >
             </div>
         </div>
         <div class="row control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
-                <label>Passwort</label>
+                <label><i class="fa fa-user-secret"></i> Passwort</label>
                 <input type="password" class="form-control" placeholder="Passwort" id="password" name="password">
             </div>
         </div>
@@ -22,6 +22,5 @@
             </div>
         </div>
     </form>
-
-
+    <a id="goToRegister" href="?cmd=register"><i class="fa fa-user-plus"></i> Ich habe noch keinen Account und möchte mich registrieren</a>
 </div>

@@ -4,42 +4,42 @@
                         <div class="row control-group">
                             <p id="error_message">{{ ERROR_MESSAGE }}</p>
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Username</label>
+                                <label><i class="fa fa-user"></i>   Username</label>
                                 <input type="text" value="{{ USERNAME }}" class="form-control" placeholder="Username (genau 6 alphanummerische Zeichen)" id="username" name="username" required >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Vorname</label>
+                                <label><i class="fa fa-user"></i> Vorname</label>
                                 <input type="text" value="{{ FIRSTNAME }}" class="form-control" placeholder="Vorname" id="firstname" name="firstname" required>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Nachname</label>
+                                <label><i class="fa fa-user"></i> Nachname</label>
                                 <input type="text" value="{{ LASTNAME }}" class="form-control" placeholder="Nachname" id="lastname" name="lastname"required>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>E-Mail Addresse</label>
+                                <label><i class="fa fa-envelope"></i> E-Mail Addresse</label>
                                 <input type="email" value="{{ E_MAIL }}" class="form-control" placeholder="Email Address" id="email" name="email" required>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Passwort</label>
-                                <input type="password" class="form-control" placeholder="Passwort (min. 8 Zeichen + Gross, Klein, Ziffer und ¦@#°§¬\|¢´~!?=/&%ç*+)" id="password" name="password">
+                                <label><i class="fa fa-user-secret"></i> Passwort</label>
+                                <input type="password" class="form-control" placeholder="Passwort (min. 8 Zeichen + Gross, Klein, Ziffer und ¦@#°§¬\|¢´~!?=/&%ç*+)" id="password" name="password" required>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Passwort wiederholen</label>
+                                <label><i class="fa fa-user-secret"></i><i class="fa fa-user-secret"></i> Passwort wiederholen</label>
                                 <input type="password" class="form-control" placeholder="Passwort wiederholen" id="passwordConfirm" name="passwordConfirm" required>
                                 <p class="help-block text-danger"></p>
                             </div>
@@ -52,4 +52,5 @@
                             </div>
                         </div>
                     </form>
+                    <a id="goToLogin" href="?cmd=login"><i class="fa fa-sign-in"></i> Ich habe bereits einen Account und möchte mich einloggen</a>
                 </div>

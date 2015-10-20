@@ -2,4 +2,4 @@ database:
     host     : localhost
     user     : root
     password : notset
-    name     : guestbookly
+    name     : adrian_berger_guestbookly

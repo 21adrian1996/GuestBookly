@@ -276,6 +276,10 @@ div#message {
     padding: 10px 0px;
     margin-bottom: 15px;
 }
+.panel-body img {
+    display: block;
+    margin: 20px 0;
+}
 /*
  * off canvas sidebar
  * --------------------------------------------------

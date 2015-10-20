@@ -13,7 +13,7 @@ $('[data-toggle=offcanvas]').click(function() {
         if ($("#message").text() == "Um einen neuen Eintarg zu erstellen, klicken sie auf das Plus oben rechts") {
             swal({
                 title: "Herzlich  Willkommen",
-                text: "Um einen neuen Eintarg zu erstellen, klicken Sie bitte auf das <i class='fa fa-plus'></i> Icon oben rechts<br /> <br />" +
+                text: "Um einen neuen Eintrag zu erstellen, klicken Sie bitte auf das <i class='fa fa-plus'></i> Icon oben rechts<br /> <br />" +
                         "Wenn Sie das Passwort &auml;ndern m&ouml;chten, k&ouml;nnen Sie auf das <i class='fa fa-user-secret'></i> Icon klicken<br /><br />" +
                         "Zum Abmelden klicken Sie bitte auf das <i class='fa fa-sign-out'></i> Icon",
                 html: true,

@@ -1,27 +1,55 @@
 <?php
 /**
+ * This file is used to find the right cmd and do load the right components foreach cmd
  * @author Adian Berger <adrian.berger2112@gmail.com>
  * @copyright Adrian Berger <adrian.berger2112@gmail.com>
  * @link https://bitbucket.org/SuperSuperAdrian/simplybook
- * @package guestbook
  * @return empty
  * @since 0.0.1
- * @version 0.0.1
+ * @version 1.0.0
  **/
 namespace Controller;
 
+
+/**
+ * This class is used to find the right cmd and do load the right components foreach cmd
+ * @author Adian Berger <adrian.berger2112@gmail.com>
+ * @return empty
+ * @since 0.0.1
+ * @param cmd string
+ * @version 1.0.0
+ **/
 class routeHandle{
+    /**
+    * @var string used to save the cmd
+     */
     protected $cmd;
 
+    /**
+     * constructor for the route handler
+     * @author Adrian Berger <adrian.berger2112@gmail.com>
+     * @version 1.0.0
+     * @access public
+     * @return void
+     */
     public function __construct(){
         $this->findRoute();
     }
 
+    /**
+     * find the correct cmd, so we know where the user should be send
+     * @author Adrian Berger <adrian.berger2112@gmail.com>
+     * @version 1.0.0
+     * @access private
+     * @return void
+     */
     private function findRoute()
     {
+        // we need to start the session, because we check userLogin over the session
+        session_start();
+
         if (!isset($_GET['cmd'])) {
             // if user is not logged in, we send hem to register page, so he can register or go to login from there
-            // else we send him to the survey so he can answer the questions or see the evaluation
             if (!isset($_SESSION['userName'])) {
                 $this->cmd = 'register';
             } else {
@@ -39,6 +67,15 @@ class routeHandle{
         }
     }
 
+    /**
+     * find the correct cmd, so we know where the user should be send
+     * @author Adrian Berger <adrian.berger2112@gmail.com>
+     * @version 1.0.0
+     * @access private
+     * @param $database MySQLI Connection
+     * @param $template Twig Template
+     * @return $content Twig Template File
+     */
     public function doHandle($database, $template){
         switch ($this->cmd) {
             case 'json':

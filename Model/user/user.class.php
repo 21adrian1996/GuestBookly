@@ -1,25 +1,70 @@
 <?php
 /**
+ * File for class user
+ * 
  * @author Adian Berger <adrian.berger2112@gmail.com>
  * @copyright Adrian Berger <adrian.berger2112@gmail.com>
  * @link https://bitbucket.org/SuperSuperAdrian/simplybook
- * @package guestbook
  * @return empty
  * @since 0.0.1
- * @version 0.0.1
+ * @version 1.0.0
  **/
 
 namespace Model;
 
+/**
+ * This class is used to hanlde user management
+ *
+ * @author Adian Berger <adrian.berger2112@gmail.com>
+ * @since 0.0.1
+ * @version 1.0.0
+ **/
+
 class User
 {
+    /**
+     * @var int id of user
+     */
     protected $id;
+
+    /**
+     * @var string firstname of user
+     */
     protected $firstname;
+
+    /**
+     * @var string astname of user
+     */
     protected $lastname;
+
+    /**
+     * @var string password
+     */
     protected $password;
+
+    /**
+     * @var string email
+     */
     protected $email;
+
+    /**
+     * @var string username
+     */
     protected $name;
 
+    /**
+     * constructor for the user class
+     * @author Adrian Berger <adrian.berger2112@gmail.com>
+     * @version 1.0.0
+     * @access public
+     * @param integer $id
+     * @param string $name
+     * @param string $firstname
+     * @param string $lastname
+     * @param string $password
+     * @param string $email
+     * @return void
+     */
     public function __construct($id, $name, $firstname, $lastname, $password, $email)
     {
             isset($id) ? $this->id = $id : '';
@@ -30,26 +75,61 @@ class User
             isset($email) ? $this->email = $email : '';
     }
 
+    /**
+     * getter for id
+     * @author Adrian Berger <adrian.berger2112@gmail.com>
+     * @version 1.0.0
+     * @access public
+     * @return integer $id
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * getter for name
+     * @author Adrian Berger <adrian.berger2112@gmail.com>
+     * @version 1.0.0
+     * @access public
+     * @return string $name
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * getter for lastname
+     * @author Adrian Berger <adrian.berger2112@gmail.com>
+     * @version 1.0.0
+     * @access public
+     * @return string $lastname
+     */
     public function getLastname()
     {
         return $this->lastname;
     }
 
+    /**
+     * getter for firstname
+     * @author Adrian Berger <adrian.berger2112@gmail.com>
+     * @version 1.0.0
+     * @access public
+     * @return string $firstname
+     */
     public function getFirstname()
     {
         return $this->firstname;
     }
 
+    /**
+     * getter for email
+     * @author Adrian Berger <adrian.berger2112@gmail.com>
+     * @version 1.0.0
+     * @access public
+     * @return string $email
+     */
     public function getEmail()
     {
         return $this->email;
@@ -60,7 +140,7 @@ class User
      * @author Adrian Berger <adrian.berger2112@gmail.com>
      * @version 1.0.0
      * @access public
-     * @param $database PDO Object
+     * @param object $database
      * @return void
      */
     public function save($database)
@@ -81,7 +161,7 @@ class User
      * @author Adrian Berger <adrian.berger2112@gmail.com>
      * @version 1.0.0
      * @access public
-     * @param $database PDO Object
+     * @param object $database
      * @param $username String
      * @return bol
      */
@@ -108,7 +188,7 @@ class User
      * @author Adrian Berger <adrian.berger2112@gmail.com>
      * @version 1.0.0
      * @access public
-     * @param $database PDO Object
+     * @param object $database
      * @return String with error message
      */
     public function checkregisterData($database)
@@ -148,8 +228,10 @@ class User
     /**
      * Create session for user, so we can check if he is logged in
      * @author Adrian Berger <adrian.berger2112@gmail.com>
-     * @version 0.0.1
+     * @version 1.0.0
      * @access public
+     * @param object $database
+     * @return void
      */
     public function saveUserIsLoggedIn($database)
     {
@@ -161,8 +243,10 @@ class User
     /**
      * Check if username and password do match
      * @author Adrian Berger <adrian.berger2112@gmail.com>
-     * @version 0.0.1
+     * @version 1.0.0
      * @access public
+     * @param object $database
+     * @return true if user is logged in, false if not
      */
     public function checkLogin($database)
     {
@@ -178,6 +262,14 @@ class User
         }
     }
 
+    /**
+     * get the id of a user by his username
+     * @author Adrian Berger <adrian.berger2112@gmail.com>
+     * @version 1.0.0
+     * @access public
+     * @param object $database
+     * @return integer id
+     */
     public function getIdByName($database)
     {
         $query = 'SELECT id FROM `user`
@@ -186,6 +278,15 @@ class User
         $fetchedResult = $result->fetch_assoc();
         return $fetchedResult["id"];
     }
+
+    /**
+     * get then username by the id of ther user
+     * @author Adrian Berger <adrian.berger2112@gmail.com>
+     * @version 1.0.0
+     * @access public
+     * @param object $database
+     * @return string name
+     */
     public function getNameById($database)
     {
         $query = 'SELECT `name` FROM `user`
@@ -194,6 +295,15 @@ class User
         $fetchedResult = $result->fetch_assoc();
         return $fetchedResult["name"];
     }
+
+    /**
+     * change the password for a user
+     * @author Adrian Berger <adrian.berger2112@gmail.com>
+     * @version 1.0.0
+     * @access public
+     * @param object $database
+     * @return void
+     */
     public function changePassword($database){
         $query = 'UPDATE `user`
                   SET `password` = "' . hash("sha224", $this->password) . '"

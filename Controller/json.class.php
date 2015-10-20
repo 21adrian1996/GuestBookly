@@ -3,7 +3,6 @@
 /**
  * Json Controller Class
  *
- * @package    SimplyPartners
  * @author     Adrian Berger <adrian.berger2112@gmail.com>
  * @copyright  2014 Adrian Berger
  * @version    1.0.0
@@ -11,6 +10,12 @@
 
 namespace Controller;
 
+/**
+ * This class is used for all ajax requests
+ *
+ * @author     Adrian Berger <adrian.berger2112@gmail.com>
+ * @version    1.0.0
+ */
 class JsonController
 {
     /**

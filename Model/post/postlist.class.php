@@ -15,7 +15,7 @@ class PostList
 {
     public function getList($database, $template)
     {
-        $query = 'SELECT `id`, `titel`, `content`, `user_id`, `date` FROM `post`;';
+        $query = 'SELECT `id`, `titel`, `content`, `user_id`, `date` FROM `post` ORDER BY `date` DESC;';
         $result = $database->executeQuery($query);
         while ($row = $result->fetch_assoc()) {
             $fetchedResult[] = $row;

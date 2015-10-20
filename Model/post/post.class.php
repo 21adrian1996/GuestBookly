@@ -54,22 +54,22 @@ class Post
         $this->user_id = $fetchedResult['user_id'];
         $this->date = $fetchedResult['date'];
     }
-    public function save($database)
+    public function save($database, $purifier)
     {
         $query = 'INSERT INTO `post`(`titel`,`content`,`user_id`, `date`)
                   VALUES(\'' .
                             $database->real_escape_string($this->title) . '\',\'' .
-                            $database->real_escape_string($this->content) . '\',' .
+                            $database->real_escape_string($purifier->purify($this->content)) . '\',' .
                             $database->real_escape_string($this->user_id) . ', \''.
                             date('Y-m-d H:i:s',$this->date) .'\')';
         $database->executeQuery($query);
     }
-    public function update($database)
+    public function update($database, $purifier)
     {
 
         $query = 'UPDATE `post`
                     SET `titel` = "'.$database->real_escape_string($this->title).'",
-                    `content` = "'.$database->real_escape_string($this->content).'"
+                    `content` = "'.$database->real_escape_string($purifier->purify($this->content)).'"
                     WHERE `id` ='.intval($this->id);
         $database->executeQuery($query);
     }

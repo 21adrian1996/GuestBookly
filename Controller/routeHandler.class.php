@@ -126,6 +126,16 @@ class routeHandle{
                 }
                 break;
             case 'overview':
+                require_once 'htmlpurifier/library/HTMLPurifier.auto.php';
+
+                $config = \HTMLPurifier_Config::createDefault();
+                $config->set('HTML.AllowedElements', array(
+                    'br','img','p'
+                ));
+                $config->set('HTML.AllowedAttributes', array(
+                    'img.src','img.alt'
+                ));
+                $purifier = new \HTMLPurifier($config);
                 if(isset($_GET['act']) && isset($_SESSION['userName'])){
                     switch($_GET['act']){
                         case 'edit':
@@ -136,7 +146,7 @@ class routeHandle{
                                     if(isset($_POST['title']) && isset($_POST['content'])){
                                         $post->setContent($_POST['content']);
                                         $post->setTitle($_POST['title']);
-                                        $post->update($database);
+                                        $post->update($database, $purifier);
                                         header('Location: ?cmd=overview&message=edited');
                                         die();
                                     }
@@ -168,7 +178,7 @@ class routeHandle{
                             if(isset($_POST['submit'])){
                                 if(isset($_POST['title']) && isset($_POST['content'])){
                                     $post = new \Model\Post('',$_POST['title'], $_POST['content'], $_SESSION['userId'], time());
-                                    $post->save($database);
+                                    $post->save($database, $purifier);
                                     header('Location: ?cmd=overview&message=added');
                                     die();
                                 }

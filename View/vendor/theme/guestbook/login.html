@@ -1,8 +1,27 @@
 <div class="well">
     <h1>Login</h1>
-    <form action="?cmd=login" method="post" name="login" id="login">
-        <input type="text" class="form-control input-lg" placeholder="Enter your username">
-        <input type="password" class="form-control input-lg" placeholder="Enter your password">
-        <button class="btn btn-lg btn-primary" type="submit" name="submit">log me in</button>
+    <form action="?cmd=login" name="sentMessage" method="post" id="contactForm">
+        <div class="row control-group">
+            <p id="error_message">{{ ERROR_MESSAGE }}</p>
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Username</label>
+                <input type="text" value="{{ USERNAME }}" class="form-control" placeholder="Username" id="username" name="username" required >
+            </div>
+        </div>
+        <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Passwort</label>
+                <input type="password" class="form-control" placeholder="Passwort" id="password" name="password">
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <button type="submit" name="submit" class="btn btn-success btn-lg">Log in</button>
+                <button type="reset" name="submit" class="btn btn-success btn-lg">Abbrechen</button>
+            </div>
+        </div>
     </form>
+
+
 </div>

@@ -1,0 +1,55 @@
+<div class="well">
+    <h1>Registrieren</h1>
+                    <form onsubmit="return checkRegisterData()" action="?cmd=register" name="register" method="post" id="contactForm">
+                        <div class="row control-group">
+                            <p id="error_message">{{ ERROR_MESSAGE }}</p>
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Username</label>
+                                <input type="text" value="{{ USERNAME }}" class="form-control" placeholder="Username (genau 6 alphanummerische Zeichen)" id="username" name="username" required >
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Vorname</label>
+                                <input type="text" value="{{ FIRSTNAME }}" class="form-control" placeholder="Vorname" id="firstname" name="firstname" required>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Nachname</label>
+                                <input type="text" value="{{ LASTNAME }}" class="form-control" placeholder="Nachname" id="lastname" name="lastname"required>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>E-Mail Addresse</label>
+                                <input type="email" value="{{ E_MAIL }}" class="form-control" placeholder="Email Address" id="email" name="email" required>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Passwort</label>
+                                <input type="password" class="form-control" placeholder="Passwort (min. 8 Zeichen + Gross, Klein, Ziffer und ¦@#°§¬\|¢´~!?=/&%ç*+)" id="password" name="password">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Passwort wiederholen</label>
+                                <input type="password" class="form-control" placeholder="Passwort wiederholen" id="passwordConfirm" name="passwordConfirm" required>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <button type="submit" name="submit" class="btn btn-success btn-lg">Senden</button>
+                                <button type="reset" name="submit" onclick="jQuery('.text-danger').text('');" class="btn btn-success btn-lg">Abbrechen</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>

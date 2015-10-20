@@ -27,5 +27,8 @@ class Database extends \mysqli{
             return $connection;
         }
     }
+    public function executeQuery($query){
+        return $this->query($query);
+    }
 
 }

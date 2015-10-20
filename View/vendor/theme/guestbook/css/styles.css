@@ -283,3 +283,13 @@ small.text-muted {
 #main, .fullwidth{
     width: 100%;
 }
+#login input {
+    width: 95%;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    max-width: 500px;
+}
+h1, #login {
+    text-align: center;
+}

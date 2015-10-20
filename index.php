@@ -11,4 +11,4 @@
 
 require_once('Controller/controller.class.php');
 
-new Controller();
+new Controller\Controller();

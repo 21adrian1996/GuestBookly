@@ -12,12 +12,13 @@
 namespace Model;
 
 class Yaml{
+    private $file;
 
-    public function __construct(){
-        return $this->getSettings();
+    public function __construct($file){
+        $this->file = $file;
     }
-    private function getSettings(){
-        $handle = fopen("../Controller/config/settings.yml", "r");
+    public function parseYAML(){
+        $handle = fopen($this->file, "r");
         if ($handle) {
             while (($line = fgets($handle)) !== false) {
                 $configData = explode(':', str_replace(array("\r", "\n", ' '), '', $line));

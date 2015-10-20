@@ -14,10 +14,12 @@ namespace Controller;
 class Classloader{
 
     public function __construct(){
-        return $this->createConnection();
+        return $this->loadClasses();
     }
     public function loadClasses(){
-        // load classes
+        require_once('Model/database.class.php');
+        require_once('Model/yaml.class.php');
+        require_once('View/vendor/autoload.php');
     }
 
 }

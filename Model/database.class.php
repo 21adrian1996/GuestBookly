@@ -17,7 +17,9 @@ class Database extends \mysqli{
         return $this->createConnection();
     }
     private function createConnection(){
-        $connection = parent::__construct('host', 'user', 'pw', 'db');
+        $yamlController = new \Model\Yaml("Controller/config/settings.yml");
+        $settings = $yamlController->parseYAML();
+        $connection = parent::__construct($settings['database']['host'], $settings['database']['user'], $settings['database']['password'], $settings['database']['name']);
         if(mysqli_connect_errno()){
             echo mysqli_connect_error();
             die();

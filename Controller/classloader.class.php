@@ -16,7 +16,9 @@ class Classloader{
     public function __construct(){
         return $this->loadClasses();
     }
+
     public function loadClasses(){
+        require_once('Controller/routeHandler.class.php');
         require_once('Model/database.class.php');
         require_once('Model/yaml.class.php');
         require_once('Model/user/user.class.php');

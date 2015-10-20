@@ -16,18 +16,15 @@ class Controller
 {
 
     public function __construct(){
-        $this->loadClasses();
-        $database = $this->getDatabaseConnection();
-        $this->loadSystem($database);
-    }
-    private function loadClasses(){
         require_once('classloader.class.php');
         new Classloader();
+        $database = new \Model\Database();
+        $this->loadSystem($database);
     }
-    private function getDatabaseConnection(){
-        return new \Model\Database();
-    }
+
     private function loadSystem($database){
+        $cmd = new routeHandle();
+        var_dump($cmd);
         $loader = new \Twig_Loader_Filesystem('View/vendor/theme/guestbook');
         $this->template = new \Twig_Environment($loader);
 
